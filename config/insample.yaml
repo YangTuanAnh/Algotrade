@@ -1,0 +1,8 @@
+---
+tick_path: "data/train.csv"
+vnindex_path: "data/train_vnindex.csv"
+initial_asset: 500
+buy_fee: 0.00035
+sell_fee: 0.00035
+periods_per_year: 252
+risk_free: 0.06
