@@ -6,3 +6,5 @@ buy_fee: 0.00035
 sell_fee: 0.00035
 periods_per_year: 252
 risk_free: 0.06
+rsi_oversold: 55
+rsi_overbought: 65

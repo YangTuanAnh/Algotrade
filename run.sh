@@ -11,5 +11,13 @@ python -m src.dataloader -f 2025-01-01 -t 2025-12-31 -o data/test.csv
 python -m src.dataloader -f 2023-01-01 -t 2024-12-31 -o data/train_vnindex.csv -vni
 python -m src.dataloader -f 2025-01-01 -t 2025-12-31 -o data/test_vnindex.csv -vni
 
-python -m src.backtest -i config/insample.yaml
-python -m src.backtest -i config/outsample.yaml
+python -m src.backtest -i config/insample_macd.yaml
+python -m src.backtest -i config/outsample_macd.yaml
+
+python -m src.backtest -i config/insample_macd_rsi_30_70.yaml
+python -m src.backtest -i config/outsample_macd_rsi_30_70.yaml
+
+python -m src.optuna -i config/insample_macd.yaml
+
+python -m src.backtest -i config/insample_macd_rsi_55_65.yaml
+python -m src.backtest -i config/outsample_macd_rsi_55_65.yaml

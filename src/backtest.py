@@ -26,7 +26,7 @@ if __name__ == "__main__":
         filename=os.path.join(log_dir, "results.log"), level=logging.INFO
     )
 
-    # Get signals (MACD)
+    # Get MACD
     df = pd.read_csv(config["tick_path"])
     k = df["close"].ewm(span=12, adjust=False, min_periods=12).mean()
     d = df["close"].ewm(span=26, adjust=False, min_periods=26).mean()
@@ -35,9 +35,28 @@ if __name__ == "__main__":
     macd_s = macd.ewm(span=9, adjust=False, min_periods=9).mean()
     macd_h = macd - macd_s
 
+    # Get RSI (https://stackoverflow.com/questions/57006437/calculate-rsi-indicator-from-pandas-dataframe)
+    change = df["close"].diff(1)
+    gain = change.mask(change < 0, 0.0)
+    loss = -change.mask(change > 0, -0.0)
+
+    def rma(x, n):
+        """Running moving average"""
+        a = np.full_like(x, np.nan)
+        a[n] = x[1:n+1].mean()
+        for i in range(n+1, len(x)):
+            a[i] = (a[i-1] * (n - 1) + x[i]) / n
+        return a
+
+    avg_gain = rma(gain.to_numpy(), 14)
+    avg_loss = rma(loss.to_numpy(), 14)
+
+    rs = avg_gain / avg_loss
+    rsi = 100 - (100 / (1 + rs))
+
     # Declare long, short
-    long = (macd_h.shift(1) < 0) & (macd_h > 0)
-    short = (macd_h.shift(1) > 0) & (macd_h < 0)
+    long = (macd_h.shift(1) < 0) & (macd_h > 0) & (rsi <= config['rsi_oversold'])
+    short = (macd_h.shift(1) > 0) & (macd_h < 0) & (rsi >= config['rsi_overbought'])
 
     position = pd.Series(np.nan, index=df.index)
 
@@ -94,7 +113,7 @@ if __name__ == "__main__":
     logger.info(f"Information Ratio: {information_ratio:.3f}")
 
     # Plot
-    fig, ax = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
+    fig, ax = plt.subplots(4, 1, figsize=(12, 8), sharex=True)
 
     long_idx = np.where(long)[0]
     short_idx = np.where(short)[0]
@@ -115,10 +134,15 @@ if __name__ == "__main__":
     ax[1].grid("on")
     ax[1].legend()
 
-    ax[2].plot(asset, label="Portfolio")
-    ax[2].plot(benchmark, label="VNINDEX")
+    ax[2].plot(rsi, label="RSI")
+    ax[2].axhline(50, color="black", linewidth=0.8)
     ax[2].grid("on")
     ax[2].legend()
+
+    ax[3].plot(asset, label="Portfolio")
+    ax[3].plot(benchmark, label="VNINDEX")
+    ax[3].grid("on")
+    ax[3].legend()
 
     fig.savefig(os.path.join(log_dir, "plot.png"), dpi=200)
     print("Saved backtest results at", log_dir)

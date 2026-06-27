@@ -1,0 +1,7 @@
+INFO:__main__:Inital assets: 500000000.000
+INFO:__main__:Final assets: 915551555.000
+INFO:__main__:Total fee: 2048445.000
+INFO:__main__:Sharpe : 1.130
+INFO:__main__:Sortino: 1.637
+INFO:__main__:MDD    : -20.33%
+INFO:__main__:Information Ratio: 1.095

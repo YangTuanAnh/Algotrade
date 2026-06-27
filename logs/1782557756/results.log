@@ -1,0 +1,12 @@
+INFO:__main__:Number of finished trials: 441
+INFO:__main__:Top 10 by Sharpe
+INFO:__main__: 1. OS= 55 OB= 65 | Sharpe= 1.1300 Sortino= 1.6367 MDD=-0.2033 IR= 1.0953 Fee=      2.05 Asset=    915.55
+INFO:__main__: 2. OS= 65 OB= 65 | Sharpe= 1.1300 Sortino= 1.6367 MDD=-0.2033 IR= 1.0953 Fee=      2.05 Asset=    915.55
+INFO:__main__: 3. OS= 60 OB= 65 | Sharpe= 1.1300 Sortino= 1.6367 MDD=-0.2033 IR= 1.0953 Fee=      2.05 Asset=    915.55
+INFO:__main__: 4. OS= 70 OB=100 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
+INFO:__main__: 5. OS= 95 OB= 90 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
+INFO:__main__: 6. OS= 55 OB= 95 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
+INFO:__main__: 7. OS= 85 OB= 85 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
+INFO:__main__: 8. OS= 75 OB= 85 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
+INFO:__main__: 9. OS= 65 OB=100 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
+INFO:__main__:10. OS= 75 OB= 75 | Sharpe= 0.6855 Sortino= 0.8672 MDD=-0.3137 IR= 0.8679 Fee=      0.37 Asset=    761.23
